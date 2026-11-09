@@ -3,6 +3,7 @@ import { RequestStatus } from '@/types/Enums/RequestStatus';
 import type { NewProduct, Product } from '@/types/product';
 import { serializeApiError, type SerializedApiError } from '@/Utils/api/ApiError';
 import * as productsService from '@/Utils/services/products';
+import { uniqueId } from '@/Utils/uniqueId';
 
 interface ProductsState {
   items: Product[];
@@ -94,10 +95,7 @@ const productsSlice = createSlice({
       // (newest first). It disappears on a full reload; documented in the README.
       .addCase(createProduct.fulfilled, (state, { payload }) => {
         state.createStatus = RequestStatus.Succeeded;
-        // FakeStoreAPI returns the same id for every create; keep React keys unique locally.
-        const taken = state.items.some((item) => item.id === payload.id);
-        const id = taken ? Math.max(...state.items.map((item) => item.id)) + 1 : payload.id;
-        state.items.unshift({ ...payload, id });
+        state.items.unshift({ ...payload, id: uniqueId(payload.id, state.items) });
       })
       .addCase(createProduct.rejected, (state, action) => {
         state.createStatus = RequestStatus.Failed;
