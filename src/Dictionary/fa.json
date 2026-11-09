@@ -1,0 +1,51 @@
+{
+  "Brand": {
+    "name": "نوا",
+    "panel": "پنل مدیریت"
+  },
+  "Common": {
+    "retry": "تلاش دوباره",
+    "cancel": "انصراف",
+    "close": "بستن",
+    "unknownError": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
+    "networkError": "ارتباط با سرور برقرار نشد. اتصال خود را بررسی و دوباره تلاش کنید."
+  },
+  "Nav": {
+    "main": "منوی اصلی",
+    "products": "محصولات",
+    "users": "کاربران"
+  },
+  "Topbar": {
+    "switchLanguage": "تغییر زبان",
+    "switchToDark": "تغییر به تم تیره",
+    "switchToLight": "تغییر به تم روشن",
+    "logout": "خروج"
+  },
+  "Languages": {
+    "fa": "فارسی",
+    "en": "English"
+  },
+  "Login": {
+    "title": "ورود به پنل مدیریت نوا",
+    "subtitle": "برای ادامه با حساب مدیر وارد شوید.",
+    "username": "نام کاربری",
+    "password": "رمز عبور",
+    "submit": "ورود",
+    "submitting": "در حال ورود…",
+    "invalidCredentials": "نام کاربری یا رمز عبور اشتباه است.",
+    "showPassword": "نمایش رمز عبور",
+    "hidePassword": "پنهان کردن رمز عبور",
+    "errors": {
+      "usernameRequired": "لطفاً نام کاربری را وارد کنید.",
+      "passwordRequired": "لطفاً رمز عبور را وارد کنید."
+    }
+  },
+  "NotFound": {
+    "title": "صفحه پیدا نشد",
+    "body": "صفحه‌ای که دنبال آن هستید وجود ندارد.",
+    "back": "بازگشت به محصولات"
+  },
+  "Placeholder": {
+    "comingSoon": "این بخش در مرحله بعد ساخته می‌شود."
+  }
+}
