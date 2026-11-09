@@ -1,0 +1,51 @@
+{
+  "Brand": {
+    "name": "NOVA",
+    "panel": "Admin panel"
+  },
+  "Common": {
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "close": "Close",
+    "unknownError": "Something went wrong. Please try again.",
+    "networkError": "Could not reach the server. Check your connection and try again."
+  },
+  "Nav": {
+    "main": "Main navigation",
+    "products": "Products",
+    "users": "Users"
+  },
+  "Topbar": {
+    "switchLanguage": "Switch language",
+    "switchToDark": "Switch to dark theme",
+    "switchToLight": "Switch to light theme",
+    "logout": "Log out"
+  },
+  "Languages": {
+    "fa": "فارسی",
+    "en": "English"
+  },
+  "Login": {
+    "title": "Sign in to NOVA Admin",
+    "subtitle": "Use your administrator account to continue.",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "invalidCredentials": "Incorrect username or password.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "errors": {
+      "usernameRequired": "Please enter your username.",
+      "passwordRequired": "Please enter your password."
+    }
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist.",
+    "back": "Back to products"
+  },
+  "Placeholder": {
+    "comingSoon": "This section is built in the next step."
+  }
+}
