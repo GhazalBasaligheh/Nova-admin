@@ -47,5 +47,54 @@
   },
   "Placeholder": {
     "comingSoon": "This section is built in the next step."
+  },
+  "Categories": {
+    "electronics": "Electronics",
+    "jewelery": "Jewelry",
+    "mens": "Men's clothing",
+    "womens": "Women's clothing"
+  },
+  "Products": {
+    "title": "Products",
+    "add": "Add product",
+    "searchLabel": "Search products",
+    "searchPlaceholder": "Search by title or category…",
+    "count": "{{count, number}} products",
+    "count_one": "{{count, number}} product",
+    "count_other": "{{count, number}} products",
+    "columns": {
+      "image": "Image",
+      "title": "Title",
+      "price": "Price",
+      "category": "Category"
+    },
+    "loading": "Loading products…",
+    "errorTitle": "Couldn't load products",
+    "emptyTitle": "No products yet",
+    "noMatchesTitle": "No matching products",
+    "noMatchesBody": "Try a different search term.",
+    "created": "Product \"{{title}}\" was added.",
+    "createFailed": "The product couldn't be added. Please try again.",
+    "form": {
+      "title": "New product",
+      "fieldTitle": "Title",
+      "fieldDescription": "Description",
+      "fieldPrice": "Price (USD)",
+      "fieldCategory": "Category",
+      "chooseCategory": "Choose a category",
+      "fieldImage": "Image URL",
+      "preview": "Image preview",
+      "submit": "Add product",
+      "submitting": "Adding…"
+    },
+    "errors": {
+      "titleRequired": "Please enter a title.",
+      "descriptionRequired": "Please enter a description.",
+      "priceRequired": "Please enter a price.",
+      "pricePositive": "Price must be a number greater than 0.",
+      "categoryRequired": "Please choose a category.",
+      "imageRequired": "Please enter an image URL.",
+      "imageUrl": "Please enter a valid URL."
+    }
   }
 }

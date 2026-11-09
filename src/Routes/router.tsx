@@ -1,12 +1,10 @@
 import { createBrowserRouter, Navigate } from 'react-router';
 import { AdminLayout } from '@/Components/Layout/AdminLayout';
 import { LoginPage } from '@/Pages/LoginPage';
-import { NotFoundPage } from '@/Pages/NotFoundPage';
-import { ProductsPage } from '@/Pages/ProductsPage';
-import { UsersPage } from '@/Pages/UsersPage';
 import { ProtectedRoute, PublicOnlyRoute } from './guards';
 import { DEFAULT_AUTHENTICATED_PATH, paths } from './paths';
 
+// Admin pages are code-split: each loads on first visit, keeping the login bundle small.
 export const router = createBrowserRouter([
   {
     element: <PublicOnlyRoute />,
@@ -19,9 +17,18 @@ export const router = createBrowserRouter([
         element: <AdminLayout />,
         children: [
           { path: paths.root, element: <Navigate to={DEFAULT_AUTHENTICATED_PATH} replace /> },
-          { path: paths.products, element: <ProductsPage /> },
-          { path: paths.users, element: <UsersPage /> },
-          { path: '*', element: <NotFoundPage /> },
+          {
+            path: paths.products,
+            lazy: async () => ({ Component: (await import('@/Pages/ProductsPage')).ProductsPage }),
+          },
+          {
+            path: paths.users,
+            lazy: async () => ({ Component: (await import('@/Pages/UsersPage')).UsersPage }),
+          },
+          {
+            path: '*',
+            lazy: async () => ({ Component: (await import('@/Pages/NotFoundPage')).NotFoundPage }),
+          },
         ],
       },
     ],
