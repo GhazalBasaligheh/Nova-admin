@@ -96,5 +96,46 @@
       "imageRequired": "Please enter an image URL.",
       "imageUrl": "Please enter a valid URL."
     }
+  },
+  "Users": {
+    "title": "Users",
+    "add": "Add user",
+    "searchLabel": "Search users",
+    "searchPlaceholder": "Search by name, username or email…",
+    "count_one": "{{count, number}} user",
+    "count_other": "{{count, number}} users",
+    "columns": {
+      "firstName": "First name",
+      "username": "Username",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "loading": "Loading users…",
+    "errorTitle": "Couldn't load users",
+    "emptyTitle": "No users yet",
+    "noMatchesTitle": "No matching users",
+    "noMatchesBody": "Try a different search term.",
+    "created": "User \"{{username}}\" was added.",
+    "createFailed": "The user couldn't be added. Please try again.",
+    "form": {
+      "title": "New user",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "phone": "Phone",
+      "submit": "Add user",
+      "submitting": "Adding…"
+    },
+    "errors": {
+      "firstNameRequired": "Please enter a first name.",
+      "lastNameRequired": "Please enter a last name.",
+      "usernameRequired": "Please enter a username.",
+      "emailRequired": "Please enter an email address.",
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordRequired": "Please enter a password.",
+      "phoneRequired": "Please enter a phone number."
+    }
   }
 }

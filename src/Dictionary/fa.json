@@ -96,5 +96,46 @@
       "imageRequired": "لطفاً آدرس تصویر را وارد کنید.",
       "imageUrl": "لطفاً یک آدرس معتبر وارد کنید."
     }
+  },
+  "Users": {
+    "title": "کاربران",
+    "add": "افزودن کاربر",
+    "searchLabel": "جستجوی کاربران",
+    "searchPlaceholder": "جستجو بر اساس نام، نام کاربری یا ایمیل…",
+    "count_one": "{{count, number}} کاربر",
+    "count_other": "{{count, number}} کاربر",
+    "columns": {
+      "firstName": "نام",
+      "username": "نام کاربری",
+      "email": "ایمیل",
+      "phone": "تلفن"
+    },
+    "loading": "در حال بارگذاری کاربران…",
+    "errorTitle": "بارگذاری کاربران ناموفق بود",
+    "emptyTitle": "هنوز کاربری وجود ندارد",
+    "noMatchesTitle": "کاربری مطابق جستجو نیست",
+    "noMatchesBody": "عبارت دیگری را امتحان کنید.",
+    "created": "کاربر «{{username}}» اضافه شد.",
+    "createFailed": "افزودن کاربر ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "form": {
+      "title": "کاربر جدید",
+      "firstName": "نام",
+      "lastName": "نام خانوادگی",
+      "username": "نام کاربری",
+      "email": "ایمیل",
+      "password": "رمز عبور",
+      "phone": "تلفن",
+      "submit": "افزودن کاربر",
+      "submitting": "در حال افزودن…"
+    },
+    "errors": {
+      "firstNameRequired": "لطفاً نام را وارد کنید.",
+      "lastNameRequired": "لطفاً نام خانوادگی را وارد کنید.",
+      "usernameRequired": "لطفاً نام کاربری را وارد کنید.",
+      "emailRequired": "لطفاً ایمیل را وارد کنید.",
+      "emailInvalid": "لطفاً یک ایمیل معتبر وارد کنید.",
+      "passwordRequired": "لطفاً رمز عبور را وارد کنید.",
+      "phoneRequired": "لطفاً شماره تلفن را وارد کنید."
+    }
   }
 }
