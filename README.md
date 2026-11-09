@@ -1,80 +1,79 @@
-# NOVA Admin
+# پنل مدیریت نوا (NOVA Admin)
 
-The admin panel of the NOVA online store, built for the NOVA Frontend (UI) Developer Technical Challenge.
-It's a bilingual (Persian RTL / English LTR) React single-page app with light and dark themes, where an
-administrator signs in and manages products and users through [FakeStoreAPI](https://fakestoreapi.com).
+پنل مدیریت فروشگاه آنلاین نوا که برای چالش فنی توسعه‌دهنده فرانت‌اند (UI) نوا ساخته شده است.
+این پروژه یک اپلیکیشن تک‌صفحه‌ای (SPA) دوزبانه (فارسی راست‌به‌چپ و انگلیسی چپ‌به‌راست) با React و تم روشن و تیره است که در آن
+مدیر وارد می‌شود و محصولات و کاربران را از طریق [FakeStoreAPI](https://fakestoreapi.com) مدیریت می‌کند.
 
-The public storefront lives in a separate repository: [NOVA Store](https://github.com/GhazalBasaligheh/Nova-store).
+ویترین عمومی فروشگاه در مخزنی جداگانه قرار دارد: [NOVA Store](https://github.com/GhazalBasaligheh/Nova-store).
 
-## Contents
+## فهرست مطالب
 
-- [Features](#features)
-- [Tech stack](#tech-stack)
-- [Getting started](#getting-started)
-- [Environment variables](#environment-variables)
-- [Scripts](#scripts)
-- [Folder structure](#folder-structure)
-- [Architecture](#architecture)
-  - [Routing and route protection](#routing-and-route-protection)
-  - [State management](#state-management)
-  - [API communication](#api-communication)
-  - [Authentication and token storage](#authentication-and-token-storage)
-  - [Internationalization and theme](#internationalization-and-theme)
-  - [Forms and validation](#forms-and-validation)
-  - [Search](#search)
-- [FakeStoreAPI limitations and workarounds](#fakestoreapi-limitations-and-workarounds)
-- [Accessibility](#accessibility)
-- [Assumptions](#assumptions)
-- [Out of scope](#out-of-scope)
-- [Known limitations](#known-limitations)
-- [Time spent](#time-spent)
+- [امکانات](#امکانات)
+- [فناوری‌ها](#فناوریها)
+- [راه‌اندازی](#راهاندازی)
+- [متغیرهای محیطی](#متغیرهای-محیطی)
+- [اسکریپت‌ها](#اسکریپتها)
+- [ساختار پوشه‌ها](#ساختار-پوشهها)
+- [معماری](#معماری)
+  - [مسیریابی و محافظت از مسیرها](#مسیریابی-و-محافظت-از-مسیرها)
+  - [مدیریت state](#مدیریت-state)
+  - [ارتباط با API](#ارتباط-با-api)
+  - [احراز هویت و نگهداری توکن](#احراز-هویت-و-نگهداری-توکن)
+  - [چندزبانگی و تم](#چندزبانگی-و-تم)
+  - [فرم و اعتبارسنجی](#فرم-و-اعتبارسنجی)
+  - [جستجو](#جستجو)
+- [محدودیت‌های FakeStoreAPI و راه‌حل‌ها](#محدودیتهای-fakestoreapi-و-راهحلها)
+- [دسترس‌پذیری](#دسترسپذیری)
+- [پیش‌فرض‌ها](#پیشفرضها)
+- [خارج از محدوده](#خارج-از-محدوده)
+- [محدودیت‌های شناخته‌شده](#محدودیتهای-شناختهشده)
+- [زمان صرف‌شده](#زمان-صرفشده)
 
-## Features
+## امکانات
 
-- **Login** with username and password through `POST /auth/login`, with error messages for wrong credentials and
-  network failures. Logout is in the top bar.
-- **Protected routes:** all admin pages require a session. Logged-out visitors are sent to the login page and
-  returned to the page they asked for after signing in.
-- **Products:** a table with image, title, price and category, search, and an **Add product** form (title,
-  description, price, category, image URL) with validation. A new product appears in the list right away.
-- **Users:** a table with first name, username, email and phone, search, and an **Add user** form (first name,
-  last name, username, email, password, phone) with validation. A new user appears in the list right away.
-- **Explicit states** everywhere: loading skeletons, errors with retry, empty lists, no search matches, and
-  success messages.
-- **Persian (default, RTL) and English (LTR)**, switchable from the top bar or the login page.
-- **Light and dark themes**, remembered across visits and applied before the first paint.
-- **Layout:** fixed sidebar, top bar and content area, designed for desktop (≥ 1280 px) as the brief allows.
+- **ورود** با نام کاربری و رمز عبور از طریق `POST /auth/login`، همراه با پیام خطا برای اطلاعات نادرست و مشکلات شبکه.
+  دکمه خروج در نوار بالا قرار دارد.
+- **مسیرهای محافظت‌شده:** همه صفحه‌های مدیریت به نشست فعال نیاز دارند. بازدیدکننده واردنشده به صفحه ورود فرستاده
+  می‌شود و پس از ورود به صفحه‌ای که خواسته بود برمی‌گردد.
+- **محصولات:** جدولی با تصویر، عنوان، قیمت و دسته‌بندی، جستجو، و فرم **افزودن محصول** (عنوان، توضیحات، قیمت،
+  دسته‌بندی، آدرس تصویر) با اعتبارسنجی. محصول جدید بلافاصله در لیست ظاهر می‌شود.
+- **کاربران:** جدولی با نام، نام کاربری، ایمیل و تلفن، جستجو، و فرم **افزودن کاربر** (نام، نام خانوادگی، نام کاربری،
+  ایمیل، رمز عبور، تلفن) با اعتبارسنجی. کاربر جدید بلافاصله در لیست ظاهر می‌شود.
+- **حالت‌های صریح** در همه‌جا: اسکلتون بارگذاری، خطا با تلاش دوباره، لیست خالی، نبود نتیجه جستجو و پیام موفقیت.
+- **فارسی (پیش‌فرض، راست‌به‌چپ) و انگلیسی (چپ‌به‌راست)**، قابل تغییر از نوار بالا یا صفحه ورود.
+- **تم روشن و تیره**، ماندگار بین بازدیدها و اعمال‌شده پیش از اولین نمایش.
+- **چیدمان:** نوار کناری ثابت، نوار بالا و ناحیه محتوا، طراحی‌شده برای دسکتاپ (۱۲۸۰ پیکسل و بیشتر) طبق اجازه سند چالش.
 
-## Tech stack
+## فناوری‌ها
 
-| Concern      | Choice                                                               |
+| موضوع        | انتخاب                                                               |
 | ------------ | -------------------------------------------------------------------- |
-| Build        | Vite 8, React 19, TypeScript 5.9 (strict)                            |
-| Routing      | react-router 7                                                       |
-| Global state | Redux Toolkit 2 (`createAsyncThunk`, listener middleware)            |
-| Local state  | `useState`, Formik                                                   |
-| HTTP         | Axios with a single shared instance                                  |
-| Styling      | styled-components 6                                                  |
-| i18n         | react-i18next + i18next                                              |
-| Forms        | Formik + Yup                                                         |
-| Font         | Vazirmatn (self-hosted variable font, SIL OFL)                       |
-| Quality      | ESLint (typescript-eslint, react-hooks, `no-explicit-any`), Prettier |
+| بیلد         | Vite 8، React 19، TypeScript 5.9 (strict)                            |
+| مسیریابی     | react-router 7                                                       |
+| state سراسری | Redux Toolkit 2 (`createAsyncThunk`، listener middleware)            |
+| state محلی   | `useState`، Formik                                                   |
+| HTTP         | Axios با یک نمونه مشترک                                              |
+| استایل       | styled-components 6                                                  |
+| چندزبانگی    | react-i18next + i18next                                              |
+| فرم‌ها       | Formik + Yup                                                         |
+| فونت         | وزیرمتن (فونت متغیر میزبانی‌شده در پروژه، مجوز SIL OFL)              |
+| کیفیت کد     | ESLint (typescript-eslint، react-hooks، `no-explicit-any`)، Prettier |
 
-Dependencies are pinned to exact versions. Two choices differ from the current Vite template on purpose:
+نسخه وابستگی‌ها دقیقاً ثابت شده است. دو انتخاب عمداً با قالب فعلی Vite فرق دارند:
 
-- **TypeScript 5.9 instead of 7.0:** 7.0 is a new major release. Version 5.9 also matches the Store project.
-- **`erasableSyntaxOnly` is off,** because the brief requires TypeScript enums in `types/Enums`.
+- **TypeScript نسخه 5.9 به‌جای 7.0:** نسخه 7.0 یک نسخه اصلی جدید است. نسخه 5.9 با پروژه Store هم یکسان است.
+- **گزینه `erasableSyntaxOnly` خاموش است،** چون سند چالش enumهای TypeScript را در `types/Enums` خواسته است.
 
-react-router stays on 7.x (8.x was released recently) for maturity.
+react-router برای پایداری روی نسخه 7.x مانده است (نسخه 8.x به‌تازگی منتشر شده).
 
-## Getting started
+## راه‌اندازی
 
-### Prerequisites
+### پیش‌نیازها
 
-- Node.js **20.19+ or 22.12+** (developed on Node 22.13)
-- npm 10+
+- Node.js **نسخه 20.19 به بالا یا 22.12 به بالا** (توسعه با Node 22.13 انجام شده است)
+- npm نسخه 10 یا جدیدتر
 
-### Install and run
+### نصب و اجرا
 
 ```bash
 git clone https://github.com/GhazalBasaligheh/Nova-admin.git
@@ -84,253 +83,249 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Open the URL Vite prints (by default http://localhost:5173).
+آدرسی را که Vite نمایش می‌دهد باز کنید (به‌طور پیش‌فرض http://localhost:5173).
 
-### Signing in
+### ورود به پنل
 
-FakeStoreAPI only accepts its own seeded demo users. Their usernames and passwords are listed in the
-[FakeStoreAPI documentation](https://fakestoreapi.com/docs) and returned by `GET /users`. Credentials are
-deliberately not included in this repository.
+FakeStoreAPI فقط کاربران نمونه از پیش تعریف‌شده خودش را می‌پذیرد. نام کاربری و رمز عبور آن‌ها در
+[مستندات FakeStoreAPI](https://fakestoreapi.com/docs) آمده و توسط `GET /users` هم برگردانده می‌شود. اطلاعات ورود
+عمداً در این مخزن قرار داده نشده است.
 
-### Production build
+### بیلد نسخه production
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Environment variables
+## متغیرهای محیطی
 
-Copy `.env.example` to `.env.local`. Vite inlines `VITE_*` variables into the client bundle, so they must never
-contain secrets.
+فایل `.env.example` را به `.env.local` کپی کنید. Vite متغیرهای `VITE_*` را داخل باندل سمت کاربر قرار می‌دهد، پس این
+متغیرها هرگز نباید اطلاعات محرمانه داشته باشند.
 
-| Variable            | Purpose                                    | Example                    |
-| ------------------- | ------------------------------------------ | -------------------------- |
-| `VITE_API_BASE_URL` | Base URL used by the shared Axios instance | `https://fakestoreapi.com` |
+| متغیر               | کاربرد                           | نمونه                      |
+| ------------------- | -------------------------------- | -------------------------- |
+| `VITE_API_BASE_URL` | آدرس پایه برای نمونه مشترک Axios | `https://fakestoreapi.com` |
 
-The app fails at startup with a clear message if it's missing.
+اگر این متغیر وجود نداشته باشد، برنامه هنگام شروع با پیامی واضح متوقف می‌شود.
 
-## Scripts
+## اسکریپت‌ها
 
-| Script                 | Description                                |
-| ---------------------- | ------------------------------------------ |
-| `npm run dev`          | Development server                         |
-| `npm run build`        | Type-check (`tsc -b`) and production build |
-| `npm run preview`      | Serve the production build                 |
-| `npm run type-check`   | `tsc -b`                                   |
-| `npm run lint`         | ESLint                                     |
-| `npm run format`       | Prettier (write)                           |
-| `npm run format:check` | Prettier (check only)                      |
+| اسکریپت                | توضیح                                   |
+| ---------------------- | --------------------------------------- |
+| `npm run dev`          | سرور توسعه                              |
+| `npm run build`        | بررسی تایپ (`tsc -b`) و بیلد production |
+| `npm run preview`      | اجرای بیلد production                   |
+| `npm run type-check`   | `tsc -b`                                |
+| `npm run lint`         | ESLint                                  |
+| `npm run format`       | Prettier (اعمال تغییرات)                |
+| `npm run format:check` | Prettier (فقط بررسی)                    |
 
-## Folder structure
+## ساختار پوشه‌ها
 
-The structure follows section 3-3 of the challenge brief, including its capitalized folder names.
+ساختار مطابق بخش ۳-۳ سند چالش است، از جمله نام پوشه‌ها با حرف بزرگ.
 
 ```
 src/
 ├── assets/
-│   ├── Fonts/            # Vazirmatn variable font + license
-│   ├── Icons/            # Inline SVG icon components
-│   └── Images/           # (empty)
-├── Components/           # Page-specific components
-│   ├── Layout/           # AdminLayout, Sidebar, Topbar
+│   ├── Fonts/            # فونت متغیر وزیرمتن + مجوز
+│   ├── Icons/            # کامپوننت‌های آیکون SVG
+│   └── Images/           # (خالی)
+├── Components/           # کامپوننت‌های مخصوص هر صفحه
+│   ├── Layout/           # AdminLayout، Sidebar، Topbar
 │   ├── Products/         # ProductsTable
 │   └── Users/            # UsersTable
-├── Dictionary/           # fa.json, en.json, i18n.ts (react-i18next setup)
-├── Modals/               # CreateProductModal, CreateUserModal
-├── Pages/                # LoginPage, ProductsPage, UsersPage, NotFoundPage
-├── Redux/                # store, typed hooks, listener middleware, slices/ (auth, products, users, ui)
-├── Routes/               # paths (centralized), router, route guards
-├── Shared/               # Reusable UI (Button, TextField, Modal, DataTable, ...), hooks, theme/
-├── Storage/              # tokenStorage (auth token), preferences (theme, language)
+├── Dictionary/           # fa.json، en.json، i18n.ts (راه‌اندازی react-i18next)
+├── Modals/               # CreateProductModal، CreateUserModal
+├── Pages/                # LoginPage، ProductsPage، UsersPage، NotFoundPage
+├── Redux/                # store، هوک‌های تایپ‌شده، listener middleware، slices/ (auth، products، users، ui)
+├── Routes/               # مسیرها (متمرکز)، router، محافظ‌های مسیر
+├── Shared/               # UI قابل استفاده مجدد (Button، TextField، Modal، DataTable، ...)، هوک‌ها، theme/
+├── Storage/              # tokenStorage (توکن احراز هویت)، preferences (تم، زبان)
 ├── types/
-│   └── Enums/            # Theme, Language/Direction, RequestStatus, ApiErrorKind
+│   └── Enums/            # Theme، Language/Direction، RequestStatus، ApiErrorKind
 ├── Utils/
-│   ├── api/              # axiosInstance, ApiError
-│   ├── services/         # auth, products, users request functions
-│   └── *.ts              # UI-independent helpers: search, categories, uniqueId
-└── Validations/          # Yup schemas: login, product, user
+│   ├── api/              # axiosInstance، ApiError
+│   ├── services/         # توابع درخواست auth، products، users
+│   └── *.ts              # توابع کمکی مستقل از UI: search، categories، uniqueId
+└── Validations/          # اسکیماهای Yup: ورود، محصول، کاربر
 ```
 
-**Notes on placement:**
+**درباره محل قرارگیری:**
 
-- **Theme tokens** live in `Shared/theme/`, since the brief's Admin tree has no context folder. They are
-  copied deliberately from NOVA Store: the two repositories share no runtime code, so the visual identity is
-  kept in sync by hand.
-- **Reusable hooks** (`useDebouncedValue`, `useFormatters`) live in `Shared/`, because the brief has no hooks
-  folder.
-- **Pure helpers** live directly in `Utils/` next to the `api/` and `services/` subfolders the brief lists.
+- **توکن‌های تم** در `Shared/theme/` هستند، چون ساختار Admin در سند چالش پوشه context ندارد. این توکن‌ها عمداً از
+  NOVA Store کپی شده‌اند: دو مخزن هیچ کد اجرایی مشترکی ندارند، پس هویت بصری به‌صورت دستی هماهنگ نگه داشته می‌شود.
+- **هوک‌های قابل استفاده مجدد** (`useDebouncedValue`، `useFormatters`) در `Shared/` هستند، چون سند چالش پوشه hooks ندارد.
+- **توابع کمکی خالص** مستقیماً در `Utils/` و کنار زیرپوشه‌های `api/` و `services/` که سند چالش فهرست کرده قرار دارند.
 
-## Architecture
+## معماری
 
-### Routing and route protection
+### مسیریابی و محافظت از مسیرها
 
-- All paths are defined in `Routes/paths.ts`, and `Routes/router.tsx` builds the router from them.
-- `ProtectedRoute` sends logged-out visitors to `/login`, remembering the page they asked for. `PublicOnlyRoute`
-  keeps logged-in users off the login page.
-- Admin pages are **code-split** (loaded on first visit), which keeps the main bundle under Vite's 500 kB warning.
-- **Route protection is a user-experience gate, not security.** Anyone can change client-side state, and
-  FakeStoreAPI doesn't require a token for any endpoint. Real protection has to come from the server.
+- همه مسیرها در `Routes/paths.ts` تعریف شده‌اند و `Routes/router.tsx` روتر را از روی آن‌ها می‌سازد.
+- `ProtectedRoute` بازدیدکننده واردنشده را به `/login` می‌فرستد و صفحه درخواستی را به خاطر می‌سپارد. `PublicOnlyRoute`
+  کاربر واردشده را از صفحه ورود دور نگه می‌دارد.
+- صفحه‌های مدیریت **code-split** هستند (در اولین بازدید بارگذاری می‌شوند) و همین باعث می‌شود باندل اصلی زیر هشدار
+  ۵۰۰ کیلوبایتی Vite بماند.
+- **محافظت از مسیرها فقط یک دروازه تجربه کاربری است، نه امنیت.** هر کسی می‌تواند state سمت کاربر را تغییر دهد و
+  FakeStoreAPI برای هیچ endpoint ای توکن نمی‌خواهد. محافظت واقعی باید از سمت سرور انجام شود.
 
-### State management
+### مدیریت state
 
-| State                                    | Where                  |
-| ---------------------------------------- | ---------------------- |
-| Auth token, login status and errors      | Redux `auth` slice     |
-| Products, categories, list/create status | Redux `products` slice |
-| Users, list/create status                | Redux `users` slice    |
-| Theme, language                          | Redux `ui` slice       |
-| Search text, modal open, notices         | `useState` in the page |
-| Form values and errors                   | Formik                 |
+| state                                     | محل                       |
+| ----------------------------------------- | ------------------------- |
+| توکن احراز هویت، وضعیت و خطاهای ورود      | slice مربوط به `auth`     |
+| محصولات، دسته‌بندی‌ها، وضعیت لیست و ایجاد | slice مربوط به `products` |
+| کاربران، وضعیت لیست و ایجاد               | slice مربوط به `users`    |
+| تم، زبان                                  | slice مربوط به `ui`       |
+| متن جستجو، باز بودن مودال، پیام‌ها        | `useState` در صفحه        |
+| مقادیر و خطاهای فرم                       | Formik                    |
 
-- **Data loading:** async work uses `createAsyncThunk` over the shared Axios instance. RTK Query wasn't used
-  because the brief requires a standalone AxiosInstance.
-- **Errors in state:** each thunk stores a small, serializable error (`{ kind, status }`) rather than an error
-  object.
-- **Load once:** the products and users thunks use a `condition` so each list is fetched **only once**.
-  Revisiting a page, or creating an item, never refetches, which would wipe out locally added items (see the
-  limitations below).
-- **Reducers stay pure:** side effects run in a Redux listener middleware (`Redux/listeners.ts`). That covers
-  saving the token and preferences, updating `<html lang dir data-theme>`, and switching i18next's language.
+- **بارگذاری داده:** کارهای ناهمگام از `createAsyncThunk` روی نمونه مشترک Axios استفاده می‌کنند. از RTK Query استفاده
+  نشده، چون سند چالش یک AxiosInstance مستقل را الزامی کرده است.
+- **خطا در state:** هر thunk یک خطای کوچک و سریال‌پذیر (`{ kind, status }`) ذخیره می‌کند، نه یک شیء خطا.
+- **فقط یک‌بار بارگذاری:** thunkهای محصولات و کاربران از یک `condition` استفاده می‌کنند تا هر لیست **فقط یک‌بار**
+  گرفته شود. بازگشت به صفحه یا ایجاد آیتم جدید هرگز باعث درخواست دوباره نمی‌شود، چون این کار آیتم‌های اضافه‌شده محلی
+  را پاک می‌کرد (محدودیت‌ها را در پایین ببینید).
+- **reducerها خالص می‌مانند:** اثرات جانبی در یک listener middleware (`Redux/listeners.ts`) اجرا می‌شوند. این شامل
+  ذخیره توکن و ترجیحات، به‌روزرسانی `<html lang dir data-theme>` و تغییر زبان i18next است.
 
-### API communication
+### ارتباط با API
 
-- `Utils/api/axiosInstance.ts` is the single Axios instance: base URL from env, 10-second timeout, JSON `Accept`
-  header.
-- **Every request sends `Authorization: Bearer <token>`** when a token exists, which is the standard pattern.
-  This header makes browsers send a CORS preflight check first. That check was **verified to be allowed** by
-  FakeStoreAPI (a cross-origin request with the header returned 200).
-- A response interceptor turns every failure into a typed `ApiError` with a `kind`: `network`, `unauthorized`
-  (401/403), `client`, `server`, `blocked` (non-JSON), `parse` or `canceled`.
-- **401/403 handling:** a 401 or 403 on any request except the login itself logs the user out. The interceptor
-  calls a handler registered at startup, so the API layer never imports the Redux store.
-- **Services** (`Utils/services/*`) return typed data and check response shapes:
-  - Lists must be arrays.
-  - Create calls must return a numeric `id`.
-  - Login must return a token.
-- **Passwords are never kept in state.** `GET /users` returns them, and the service drops them.
+- `Utils/api/axiosInstance.ts` تنها نمونه Axios است: آدرس پایه از env، مهلت ۱۰ ثانیه، هدر `Accept` از نوع JSON.
+- **هر درخواست در صورت وجود توکن، هدر `Authorization: Bearer <token>` را می‌فرستد** که الگوی استاندارد است.
+  این هدر باعث می‌شود مرورگر ابتدا یک بررسی preflight مربوط به CORS بفرستد. این بررسی **تأیید شده که** توسط
+  FakeStoreAPI مجاز است (یک درخواست بین‌دامنه‌ای با این هدر پاسخ 200 گرفت).
+- یک interceptor پاسخ، هر خطا را به یک `ApiError` تایپ‌شده با یک `kind` تبدیل می‌کند: `network`، `unauthorized`
+  (401/403)، `client`، `server`، `blocked` (پاسخ غیر JSON)، `parse` یا `canceled`.
+- **مدیریت 401/403:** خطای 401 یا 403 در هر درخواستی به جز خود ورود، کاربر را خارج می‌کند. interceptor یک handler را
+  صدا می‌زند که هنگام شروع برنامه ثبت شده است، پس لایه API هرگز store مربوط به Redux را import نمی‌کند.
+- **سرویس‌ها** (`Utils/services/*`) داده تایپ‌شده برمی‌گردانند و ساختار پاسخ را بررسی می‌کنند:
+  - لیست‌ها باید آرایه باشند.
+  - درخواست‌های ایجاد باید یک `id` عددی برگردانند.
+  - ورود باید یک توکن برگرداند.
+- **رمزهای عبور هرگز در state نگه داشته نمی‌شوند.** `GET /users` آن‌ها را برمی‌گرداند و سرویس حذفشان می‌کند.
 
-### Authentication and token storage
+### احراز هویت و نگهداری توکن
 
-`POST /auth/login` takes `{ username, password }` and returns `{ token }`. The token sits behind a single
-adapter, `Storage/tokenStorage.ts`, so the storage strategy can change in one file.
+`POST /auth/login` مقدار `{ username, password }` را می‌گیرد و `{ token }` برمی‌گرداند. توکن پشت یک آداپتور واحد یعنی
+`Storage/tokenStorage.ts` قرار دارد، پس روش نگهداری فقط با تغییر یک فایل عوض می‌شود.
 
-**Current choice: `sessionStorage`.** Here's how the options compare, given that FakeStoreAPI returns the token
-in the JSON body and this app has no server of its own:
+**انتخاب فعلی: `sessionStorage`.** با توجه به اینکه FakeStoreAPI توکن را در بدنه JSON برمی‌گرداند و این برنامه سرور
+اختصاصی ندارد، گزینه‌ها این‌طور مقایسه می‌شوند:
 
-| Option                                              | Survives refresh    | Readable by injected script (XSS) | Notes                                          |
-| --------------------------------------------------- | ------------------- | --------------------------------- | ---------------------------------------------- |
-| In memory (Redux only)                              | No                  | Only while the attack is running  | Smallest exposure; every refresh logs out      |
-| **`sessionStorage`** (chosen)                       | Yes, within the tab | Yes                               | Cleared when the tab closes                    |
-| `localStorage`                                      | Yes                 | Yes                               | Persists indefinitely; largest exposure        |
-| Cookie set by JavaScript                            | Yes                 | Yes                               | Can't be `HttpOnly`, so no gain over the above |
-| `HttpOnly; Secure; SameSite` cookie set by a server | Yes                 | No                                | Needs a backend (out of scope)                 |
+| گزینه                                                 | ماندگاری پس از رفرش | قابل خواندن توسط اسکریپت تزریقی (XSS) | توضیح                                                       |
+| ----------------------------------------------------- | ------------------- | ------------------------------------- | ----------------------------------------------------------- |
+| فقط در حافظه (Redux)                                  | خیر                 | فقط در زمان اجرای حمله                | کمترین در معرض بودن؛ هر رفرش باعث خروج می‌شود               |
+| **`sessionStorage`** (انتخاب‌شده)                     | بله، در همان تب     | بله                                   | با بستن تب پاک می‌شود                                       |
+| `localStorage`                                        | بله                 | بله                                   | برای همیشه می‌ماند؛ بیشترین در معرض بودن                    |
+| کوکی تنظیم‌شده با JavaScript                          | بله                 | بله                                   | نمی‌تواند `HttpOnly` باشد، پس مزیتی بر گزینه‌های بالا ندارد |
+| کوکی `HttpOnly; Secure; SameSite` تنظیم‌شده توسط سرور | بله                 | خیر                                   | به بک‌اند نیاز دارد (خارج از محدوده)                        |
 
-`sessionStorage` was chosen as a balance between usability (refresh keeps the session) and exposure (cleared with
-the tab). It doesn't protect the token from XSS, and encrypting it in the browser wouldn't either, because
-any key would also be in the client code. Other safeguards in this app:
+`sessionStorage` به‌عنوان تعادلی میان راحتی استفاده (رفرش نشست را حفظ می‌کند) و میزان در معرض بودن (با بستن تب پاک
+می‌شود) انتخاب شد. این روش توکن را در برابر XSS محافظت نمی‌کند و رمزگذاری آن در مرورگر هم محافظتی ایجاد نمی‌کرد، چون
+کلید رمزگذاری هم در کد سمت کاربر قرار می‌گرفت. محافظت‌های دیگر این برنامه:
 
-- No `dangerouslySetInnerHTML`.
-- No secrets or credentials in source or env files.
-- No user-entered markup is ever rendered as HTML.
+- از `dangerouslySetInnerHTML` استفاده نشده است.
+- هیچ اطلاعات محرمانه یا اطلاعات ورودی در کد منبع یا فایل‌های env نیست.
+- هیچ ورودی کاربر هرگز به‌صورت HTML رندر نمی‌شود.
 
-**Recommended production design** (what a real NOVA admin should use):
+**طراحی پیشنهادی برای production** (آنچه یک پنل مدیریت واقعی نوا باید استفاده کند):
 
-- A backend or BFF (backend-for-frontend) that performs the login and sets the session as an **`HttpOnly; Secure;
-SameSite=Strict` cookie**, ideally with the `__Host-` prefix. Scripts then can't read it.
-- **Short-lived access tokens with rotating refresh tokens,** plus server-side revocation on logout.
-- **CSRF protection** (SameSite plus a CSRF token for state-changing requests).
-- **A strict Content Security Policy** to reduce the impact of any XSS.
-- **Authorization checked on every API request on the server,** not only in the router.
+- یک بک‌اند یا BFF (بک‌اند مخصوص فرانت‌اند) که ورود را انجام می‌دهد و نشست را به‌صورت **کوکی `HttpOnly; Secure;
+SameSite=Strict`** تنظیم می‌کند، ترجیحاً با پیشوند `__Host-`. در این حالت اسکریپت‌ها نمی‌توانند آن را بخوانند.
+- **توکن‌های دسترسی کوتاه‌عمر همراه با refresh token چرخشی،** به‌علاوه ابطال نشست در سمت سرور هنگام خروج.
+- **محافظت در برابر CSRF** (SameSite به‌علاوه توکن CSRF برای درخواست‌هایی که وضعیت را تغییر می‌دهند).
+- **یک Content Security Policy سخت‌گیرانه** برای کاهش اثر هر XSS.
+- **بررسی مجوز در سرور برای هر درخواست API،** نه فقط در روتر.
 
-### Internationalization and theme
+### چندزبانگی و تم
 
-- **Dictionaries:** react-i18next loads `Dictionary/fa.json` and `en.json`. Keys are typed through
-  `types/i18next.d.ts`, so an unknown key fails at compile time. There's no Persian or English text written
-  directly in JSX.
-- **Direction:** the language sets `<html lang>` and `dir` (`rtl` / `ltr`). Layouts use CSS logical properties,
-  so the sidebar, padding and icons mirror automatically.
-- **Numbers:** counts use i18next's number formatting, and prices use `Intl.NumberFormat`, so Persian shows
-  Persian digits.
-- **Prices are shown in USD** (the API's currency, and what admins enter); only the digits follow the language.
-- **Theme:** light or dark, with design tokens copied from NOVA Store.
-- **Saved preferences:** theme and language are non-sensitive, so they're kept in `localStorage`.
-- **No flash on load:** a small inline script in `index.html` applies the saved theme, language and background
-  before the JavaScript bundle loads, so a reload never shows the wrong theme or direction.
+- **دیکشنری‌ها:** react-i18next فایل‌های `Dictionary/fa.json` و `en.json` را بارگذاری می‌کند. کلیدها از طریق
+  `types/i18next.d.ts` تایپ‌شده هستند، پس کلید ناموجود در زمان کامپایل خطا می‌دهد. هیچ متن فارسی یا انگلیسی مستقیماً در
+  JSX نوشته نشده است.
+- **جهت:** زبان، ویژگی‌های `<html lang>` و `dir` (`rtl` / `ltr`) را تنظیم می‌کند. چیدمان‌ها از ویژگی‌های منطقی CSS
+  استفاده می‌کنند، پس نوار کناری، فاصله‌ها و آیکون‌ها خودکار قرینه می‌شوند.
+- **اعداد:** شمارنده‌ها از قالب‌بندی عدد i18next و قیمت‌ها از `Intl.NumberFormat` استفاده می‌کنند، پس نسخه فارسی ارقام
+  فارسی نمایش می‌دهد.
+- **قیمت‌ها به دلار نمایش داده می‌شوند** (واحد پول API و همان چیزی که مدیر وارد می‌کند)؛ فقط ارقام از زبان پیروی می‌کنند.
+- **تم:** روشن یا تیره، با توکن‌های طراحی کپی‌شده از NOVA Store.
+- **ترجیحات ذخیره‌شده:** تم و زبان غیرحساس هستند، پس در `localStorage` نگه داشته می‌شوند.
+- **بدون پرش هنگام بارگذاری:** یک اسکریپت کوچک درون‌خطی در `index.html` تم، زبان و پس‌زمینه ذخیره‌شده را پیش از
+  بارگذاری باندل JavaScript اعمال می‌کند، پس رفرش هرگز تم یا جهت اشتباه نشان نمی‌دهد.
 
-### Forms and validation
+### فرم و اعتبارسنجی
 
-Forms use Formik with Yup schemas in `Validations/`. The brief requires Yup validation but doesn't set specific
-rules, so validation is deliberately **minimal**:
+فرم‌ها از Formik با اسکیماهای Yup در `Validations/` استفاده می‌کنند. سند چالش اعتبارسنجی با Yup را الزامی کرده اما
+قانون مشخصی تعیین نکرده است، بنابراین اعتبارسنجی عمداً **حداقلی** است:
 
-| Form    | Rules                                                                                 |
-| ------- | ------------------------------------------------------------------------------------- |
-| Login   | Username and password required                                                        |
-| Product | All fields required; price must be a number greater than 0; image must be a valid URL |
-| User    | All fields required; email must be a valid email                                      |
+| فرم   | قوانین                                                                            |
+| ----- | --------------------------------------------------------------------------------- |
+| ورود  | نام کاربری و رمز عبور الزامی                                                      |
+| محصول | همه فیلدها الزامی؛ قیمت باید عددی بزرگ‌تر از صفر باشد؛ تصویر باید آدرس معتبر باشد |
+| کاربر | همه فیلدها الزامی؛ ایمیل باید معتبر باشد                                          |
 
-No length limits, password-strength rules or phone formats were invented. Schema messages are dictionary keys,
-so errors appear in the current language. Errors are linked to their fields (`aria-invalid`,
-`aria-describedby`).
+هیچ محدودیت طول، قانون قدرت رمز عبور یا قالب تلفنی اضافه نشده است. پیام‌های اسکیما کلیدهای دیکشنری هستند، پس خطاها
+به زبان فعلی نمایش داده می‌شوند. خطاها به فیلد مربوطه متصل هستند (`aria-invalid` و `aria-describedby`).
 
-The create forms open in modals built on the native `<dialog>` element, so focus trapping, closing with Esc
-and returning focus are handled by the browser. The product form shows an image preview.
+فرم‌های ایجاد در مودال‌هایی مبتنی بر عنصر بومی `<dialog>` باز می‌شوند، پس به دام انداختن فوکوس، بستن با Esc و
+بازگرداندن فوکوس توسط خود مرورگر انجام می‌شود. فرم محصول پیش‌نمایش تصویر را نشان می‌دهد.
 
-### Search
+### جستجو
 
-Search runs in the browser over the loaded list, using local `useState`:
+جستجو در مرورگر و روی لیست بارگذاری‌شده، با `useState` محلی انجام می‌شود:
 
-- The input updates on every keystroke. Filtering uses a **300 ms debounced** value (`useDebouncedValue`) and is
-  memoized with `useMemo`, so it only reruns when the list or the debounced text changes.
-- **Products** match on title and category, including the translated category name. For example, «جواهرات»
-  finds jewelry.
-- **Users** match on first name, last name, username and email.
+- فیلد ورودی با هر کلید به‌روز می‌شود. فیلتر با مقدار **debounce شده ۳۰۰ میلی‌ثانیه‌ای** (`useDebouncedValue`) انجام و
+  با `useMemo` حافظه‌سازی می‌شود، پس فقط وقتی لیست یا متن debounce شده تغییر کند دوباره اجرا می‌شود.
+- **محصولات** بر اساس عنوان و دسته‌بندی، از جمله نام ترجمه‌شده دسته‌بندی، جستجو می‌شوند. برای مثال «جواهرات» محصولات
+  جواهرات را پیدا می‌کند.
+- **کاربران** بر اساس نام، نام خانوادگی، نام کاربری و ایمیل جستجو می‌شوند.
 
-## FakeStoreAPI limitations and workarounds
+## محدودیت‌های FakeStoreAPI و راه‌حل‌ها
 
-| Limitation                                                                                               | Workaround                                                                                                                                                |
-| -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Creates aren't saved: `POST /products` returns `201` with an id, and `POST /users` returns only `{ id }` | The new item is added to the local Redux list, newest first, and lists are never refetched after a create. **New items disappear on a full page reload.** |
-| Every create returns the same id (e.g. `21` for products, `11` for users)                                | `Utils/uniqueId.ts` assigns `max + 1` when the id already exists, so table rows keep unique keys                                                          |
-| `POST /users` returns no user fields                                                                     | The row is built from the submitted form plus the returned id                                                                                             |
-| Users must be sent as `name: { firstname, lastname }`                                                    | The service maps the form's flat fields to that shape                                                                                                     |
-| Login only works for the API's seeded demo users                                                         | Documented above; no credentials in the repo                                                                                                              |
-| The token isn't checked by any endpoint                                                                  | Bearer header is still sent; route protection is documented as UX only                                                                                    |
-| No pagination parameters                                                                                 | Full lists are loaded once (20 products, 10 users) and searched in the browser                                                                            |
-| Product text and user data are English only                                                              | Shown as-is, with `lang`/`dir="auto"` so they read correctly in the RTL layout. Category names are translated                                             |
-| Category slug `jewelery` is misspelled                                                                   | Kept as the API value; the label is translated correctly                                                                                                  |
+| محدودیت                                                                                                    | راه‌حل                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| موارد ایجادشده ذخیره نمی‌شوند: `POST /products` کد `201` با یک id برمی‌گرداند و `POST /users` فقط `{ id }` | آیتم جدید به لیست محلی Redux (جدیدترین در ابتدا) اضافه می‌شود و لیست‌ها پس از ایجاد هرگز دوباره گرفته نمی‌شوند. **آیتم‌های جدید با رفرش کامل صفحه از بین می‌روند.** |
+| هر درخواست ایجاد همان id را برمی‌گرداند (مثلاً `21` برای محصولات و `11` برای کاربران)                      | `Utils/uniqueId.ts` در صورت تکراری بودن id مقدار `max + 1` را اختصاص می‌دهد تا ردیف‌های جدول کلید یکتا داشته باشند                                                  |
+| `POST /users` هیچ فیلدی از کاربر برنمی‌گرداند                                                              | ردیف از روی فرم ارسال‌شده به‌علاوه id برگشتی ساخته می‌شود                                                                                                           |
+| کاربران باید به شکل `name: { firstname, lastname }` ارسال شوند                                             | سرویس فیلدهای ساده فرم را به این ساختار تبدیل می‌کند                                                                                                                |
+| ورود فقط برای کاربران نمونه از پیش تعریف‌شده API کار می‌کند                                                | در بالا مستند شده؛ هیچ اطلاعات ورودی در مخزن نیست                                                                                                                   |
+| هیچ endpoint ای توکن را بررسی نمی‌کند                                                                      | هدر Bearer همچنان ارسال می‌شود؛ محافظت مسیرها فقط به‌عنوان تجربه کاربری مستند شده                                                                                   |
+| پارامتر صفحه‌بندی ندارد                                                                                    | لیست‌های کامل یک‌بار بارگذاری می‌شوند (۲۰ محصول، ۱۰ کاربر) و در مرورگر جستجو می‌شوند                                                                                |
+| متن محصولات و داده کاربران فقط انگلیسی است                                                                 | همان‌طور نمایش داده می‌شوند، با `lang`/`dir="auto"` تا در چیدمان راست‌به‌چپ درست خوانده شوند. نام دسته‌بندی‌ها ترجمه می‌شود                                         |
+| نام دسته‌بندی `jewelery` غلط املایی دارد                                                                   | مقدار API حفظ شده؛ برچسب آن درست ترجمه می‌شود                                                                                                                       |
 
-Lists, the create responses and the Bearer-header CORS preflight were checked against the live API on
-2026-11-10.
+لیست‌ها، پاسخ درخواست‌های ایجاد و preflight مربوط به CORS برای هدر Bearer در تاریخ ۲۰ آبان ۱۴۰۵ (2026-11-10) با API
+زنده بررسی شده‌اند.
 
-## Accessibility
+## دسترس‌پذیری
 
-- Every form field has a visible label, and errors are announced (`role="alert"`) and linked to their field.
-- Every icon-only button has a translated `aria-label`. Focus outlines are visible.
-- Loading states use `aria-busy`. Result counts and success messages are announced through live regions.
-- Tables use proper `th scope="col"` headers.
+- هر فیلد فرم برچسب قابل مشاهده دارد و خطاها اعلام می‌شوند (`role="alert"`) و به فیلد خود متصل هستند.
+- هر دکمه فقط‌آیکون یک `aria-label` ترجمه‌شده دارد. حاشیه فوکوس قابل مشاهده است.
+- حالت‌های بارگذاری از `aria-busy` استفاده می‌کنند. تعداد نتایج و پیام‌های موفقیت از طریق live region اعلام می‌شوند.
+- جدول‌ها سرستون‌های درست با `th scope="col"` دارند.
 
-## Assumptions
+## پیش‌فرض‌ها
 
-- Persian is the default language.
-- The sidebar contains only the sections the brief requires (Products, Users). The mockup's Dashboard and
-  Settings items were left out rather than shipped as empty pages.
-- Primary buttons use the brand's orange accent from the written design guide. The Admin mockup shows blue.
-- Admin prices are entered and shown in USD.
-- Image URLs only need to be valid URLs. The browser loads them directly with `<img>`, which can't run scripts.
+- زبان پیش‌فرض فارسی است.
+- نوار کناری فقط بخش‌هایی را دارد که سند چالش خواسته است (محصولات، کاربران). موارد داشبورد و تنظیمات که در طرح اولیه
+  دیده می‌شوند، به‌جای عرضه به‌صورت صفحه‌های خالی، کنار گذاشته شدند.
+- دکمه‌های اصلی از رنگ نارنجی برند طبق راهنمای طراحی مکتوب استفاده می‌کنند. طرح اولیه پنل مدیریت آبی نشان می‌دهد.
+- قیمت‌ها در پنل مدیریت به دلار وارد و نمایش داده می‌شوند.
+- آدرس تصویر فقط باید یک آدرس معتبر باشد. مرورگر آن را مستقیماً با `<img>` بارگذاری می‌کند که نمی‌تواند اسکریپت اجرا کند.
 
-## Out of scope
+## خارج از محدوده
 
-Per the brief: editing and deleting products or users, a responsive layout below 1280 px, roles and
-permissions, and a dedicated backend. There's no Dashboard or Settings page.
+طبق سند چالش: ویرایش و حذف محصولات یا کاربران، چیدمان واکنش‌گرا برای عرض کمتر از ۱۲۸۰ پیکسل، نقش‌ها و سطوح دسترسی، و
+بک‌اند اختصاصی. صفحه داشبورد یا تنظیمات وجود ندارد.
 
-## Known limitations
+## محدودیت‌های شناخته‌شده
 
-- Created products and users exist only until the page is reloaded (FakeStoreAPI doesn't save them).
-- The token in `sessionStorage` is readable by any script running on the page (see the comparison above).
-- No automated tests; quality was checked with strict TypeScript, ESLint, Prettier, production builds and manual
-  testing in the browser.
+- محصولات و کاربران ایجادشده فقط تا رفرش صفحه وجود دارند (FakeStoreAPI آن‌ها را ذخیره نمی‌کند).
+- توکن در `sessionStorage` توسط هر اسکریپتی که در صفحه اجرا شود قابل خواندن است (مقایسه بالا را ببینید).
+- تست خودکار وجود ندارد؛ کیفیت با TypeScript سخت‌گیرانه، ESLint، Prettier، بیلدهای production و تست دستی در مرورگر
+  بررسی شده است.
 
-## Time spent
+## زمان صرف‌شده
 
-**TODO (author):** fill in the actual time spent.
+**TODO (نویسنده):** زمان واقعی صرف‌شده را وارد کنید.
