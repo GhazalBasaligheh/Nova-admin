@@ -47,5 +47,54 @@
   },
   "Placeholder": {
     "comingSoon": "این بخش در مرحله بعد ساخته می‌شود."
+  },
+  "Categories": {
+    "electronics": "الکترونیک",
+    "jewelery": "جواهرات",
+    "mens": "پوشاک مردانه",
+    "womens": "پوشاک زنانه"
+  },
+  "Products": {
+    "title": "محصولات",
+    "add": "افزودن محصول",
+    "searchLabel": "جستجوی محصولات",
+    "searchPlaceholder": "جستجو بر اساس عنوان یا دسته‌بندی…",
+    "count": "{{count, number}} محصول",
+    "count_one": "{{count, number}} محصول",
+    "count_other": "{{count, number}} محصول",
+    "columns": {
+      "image": "تصویر",
+      "title": "عنوان",
+      "price": "قیمت",
+      "category": "دسته‌بندی"
+    },
+    "loading": "در حال بارگذاری محصولات…",
+    "errorTitle": "بارگذاری محصولات ناموفق بود",
+    "emptyTitle": "هنوز محصولی وجود ندارد",
+    "noMatchesTitle": "محصولی مطابق جستجو نیست",
+    "noMatchesBody": "عبارت دیگری را امتحان کنید.",
+    "created": "محصول «{{title}}» اضافه شد.",
+    "createFailed": "افزودن محصول ناموفق بود. لطفاً دوباره تلاش کنید.",
+    "form": {
+      "title": "محصول جدید",
+      "fieldTitle": "عنوان",
+      "fieldDescription": "توضیحات",
+      "fieldPrice": "قیمت (دلار)",
+      "fieldCategory": "دسته‌بندی",
+      "chooseCategory": "یک دسته‌بندی انتخاب کنید",
+      "fieldImage": "آدرس تصویر",
+      "preview": "پیش‌نمایش تصویر",
+      "submit": "افزودن محصول",
+      "submitting": "در حال افزودن…"
+    },
+    "errors": {
+      "titleRequired": "لطفاً عنوان را وارد کنید.",
+      "descriptionRequired": "لطفاً توضیحات را وارد کنید.",
+      "priceRequired": "لطفاً قیمت را وارد کنید.",
+      "pricePositive": "قیمت باید عددی بزرگ‌تر از صفر باشد.",
+      "categoryRequired": "لطفاً یک دسته‌بندی انتخاب کنید.",
+      "imageRequired": "لطفاً آدرس تصویر را وارد کنید.",
+      "imageUrl": "لطفاً یک آدرس معتبر وارد کنید."
+    }
   }
 }
