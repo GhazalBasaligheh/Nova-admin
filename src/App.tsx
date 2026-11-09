@@ -1,4 +1,6 @@
-// Placeholder root; replaced by the router and layout shell in the next step.
+import { RouterProvider } from 'react-router';
+import { router } from '@/Routes/router';
+
 export default function App() {
-  return <main />;
+  return <RouterProvider router={router} />;
 }

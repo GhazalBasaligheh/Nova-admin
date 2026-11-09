@@ -3,6 +3,8 @@ import i18n from '@/Dictionary/i18n';
 import { preferences } from '@/Storage/preferences';
 import { languageDirection, type Language } from '@/types/Enums/Language';
 import type { Theme } from '@/types/Enums/Theme';
+import { tokenStorage } from '@/Storage/tokenStorage';
+import { login, logout } from './slices/authSlice';
 import { setLanguage, toggleTheme } from './slices/uiSlice';
 
 // Side effects of state changes, kept out of reducers and components.
@@ -34,4 +36,14 @@ listenerMiddleware.startListening({
     applyLanguage(payload);
     await i18n.changeLanguage(payload);
   },
+});
+
+listenerMiddleware.startListening({
+  actionCreator: login.fulfilled,
+  effect: ({ payload }) => tokenStorage.set(payload),
+});
+
+listenerMiddleware.startListening({
+  actionCreator: logout,
+  effect: () => tokenStorage.clear(),
 });
