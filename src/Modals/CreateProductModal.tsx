@@ -82,7 +82,6 @@ export function CreateProductModal({ open, onClose, onCreated }: CreateProductMo
     },
   });
 
-  // Schema messages are dictionary keys.
   const error = (name: keyof ProductFormValues) => {
     const key = formik.touched[name] ? formik.errors[name] : undefined;
     return key ? t(key as 'Products.errors.titleRequired') : undefined;

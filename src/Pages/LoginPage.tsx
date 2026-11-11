@@ -120,7 +120,6 @@ export function LoginPage() {
 
   const fieldError = (name: keyof LoginValues) => {
     const message = formik.touched[name] ? formik.errors[name] : undefined;
-    // Schema messages are dictionary keys.
     return message ? t(message as 'Login.errors.usernameRequired') : undefined;
   };
 

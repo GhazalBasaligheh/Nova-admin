@@ -70,7 +70,6 @@ export function CreateUserModal({ open, onClose, onCreated }: CreateUserModalPro
     },
   });
 
-  // Schema messages are dictionary keys.
   const error = (name: keyof UserFormValues) => {
     const key = formik.touched[name] ? formik.errors[name] : undefined;
     return key ? t(key as 'Users.errors.firstNameRequired') : undefined;
