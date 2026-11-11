@@ -130,7 +130,7 @@ src/
 │   ├── Fonts/            # فونت متغیر وزیرمتن + مجوز
 │   ├── Icons/            # کامپوننت‌های آیکون SVG
 │   └── Images/           # (خالی)
-├── Components/           # کامپوننت‌های مخصوص هر صفحه
+├── Components/           # کامپوننت‌های مخصوص هر صفحه (هر کدام با یک فایل .styles.ts)
 │   ├── Layout/           # AdminLayout، Sidebar، Topbar
 │   ├── Products/         # ProductsTable
 │   └── Users/            # UsersTable
@@ -139,7 +139,10 @@ src/
 ├── Pages/                # LoginPage، ProductsPage، UsersPage، NotFoundPage، ErrorPage
 ├── Redux/                # store، هوک‌های تایپ‌شده، listener middleware، slices/ (auth، products، users، ui)
 ├── Routes/               # مسیرها (متمرکز)، router، محافظ‌های مسیر
-├── Shared/               # UI قابل استفاده مجدد (Button، TextField، Modal، DataTable، ...)، هوک‌ها، theme/
+├── Shared/
+│   ├── ui/               # UI قابل استفاده مجدد: Button، TextField، Modal، DataTable، ...
+│   ├── hooks/            # useDebouncedValue، useFormatters
+│   └── theme/            # توکن‌های طراحی، GlobalStyle، AppThemeProvider
 ├── Storage/              # tokenStorage (توکن احراز هویت)، preferences (تم، زبان)
 ├── types/
 │   └── Enums/            # Theme، Language/Direction، RequestStatus، ApiErrorKind
@@ -154,7 +157,11 @@ src/
 
 - **توکن‌های تم** در `Shared/theme/` هستند، چون ساختار Admin در سند چالش پوشه context ندارد. این توکن‌ها عمداً از
   NOVA Store کپی شده‌اند: دو مخزن هیچ کد اجرایی مشترکی ندارند، پس هویت بصری به‌صورت دستی هماهنگ نگه داشته می‌شود.
-- **هوک‌های قابل استفاده مجدد** (`useDebouncedValue`، `useFormatters`) در `Shared/` هستند، چون سند چالش پوشه hooks ندارد.
+- **`Shared/` به `ui/`، `hooks/` و `theme/` تقسیم شده است** تا کامپوننت‌های پایه و هوک‌ها کنار هم قاطی نشوند.
+  هوک‌های قابل استفاده مجدد (`useDebouncedValue`، `useFormatters`) در `Shared/hooks/` هستند، چون سند چالش پوشه hooks ندارد.
+- **استایل‌ها کنار کامپوننت و در فایل جداگانه `<Name>.styles.ts` هستند** (مثلاً `Sidebar.tsx` و `Sidebar.styles.ts`)، پس فایل
+  کامپوننت فقط منطق و ساختار است. اجزای پایه‌ای که خودشان فقط یک styled component هستند (`Button`، `DataTable`، `Skeleton`)
+  همان‌طور در یک فایل مانده‌اند.
 - **توابع کمکی خالص** مستقیماً در `Utils/` و کنار زیرپوشه‌های `api/` و `services/` که سند چالش فهرست کرده قرار دارند.
 
 ## معماری
