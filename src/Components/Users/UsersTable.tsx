@@ -17,13 +17,22 @@ export function UsersTable({ users }: { users: User[] }) {
           </tr>
         </thead>
         <tbody>
-          {/* API values are Latin text; dir="auto" keeps them readable inside the RTL table. */}
+          {/* API values are Latin text. <bdi> isolates their direction without changing the
+              cell's own direction, so cells stay aligned with their (RTL) column headers. */}
           {users.map((user) => (
             <tr key={user.id}>
-              <td dir="auto">{user.name.firstname}</td>
-              <td dir="auto">{user.username}</td>
-              <td dir="ltr">{user.email}</td>
-              <td dir="ltr">{user.phone}</td>
+              <td>
+                <bdi>{user.name.firstname}</bdi>
+              </td>
+              <td>
+                <bdi>{user.username}</bdi>
+              </td>
+              <td>
+                <bdi dir="ltr">{user.email}</bdi>
+              </td>
+              <td>
+                <bdi dir="ltr">{user.phone}</bdi>
+              </td>
             </tr>
           ))}
         </tbody>

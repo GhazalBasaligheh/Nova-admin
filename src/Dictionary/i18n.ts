@@ -14,7 +14,7 @@ void i18n.use(initReactI18next).init({
   resources,
   lng: preferences.getLanguage(),
   fallbackLng: DEFAULT_LANGUAGE,
-  interpolation: { escapeValue: false }, 
+  interpolation: { escapeValue: false },
   returnNull: false,
 });
 
