@@ -136,7 +136,7 @@ src/
 │   └── Users/            # UsersTable
 ├── Dictionary/           # fa.json، en.json، i18n.ts (راه‌اندازی react-i18next)
 ├── Modals/               # CreateProductModal، CreateUserModal
-├── Pages/                # LoginPage، ProductsPage، UsersPage، NotFoundPage
+├── Pages/                # LoginPage، ProductsPage، UsersPage، NotFoundPage، ErrorPage
 ├── Redux/                # store، هوک‌های تایپ‌شده، listener middleware، slices/ (auth، products، users، ui)
 ├── Routes/               # مسیرها (متمرکز)، router، محافظ‌های مسیر
 ├── Shared/               # UI قابل استفاده مجدد (Button، TextField، Modal، DataTable، ...)، هوک‌ها، theme/
@@ -146,7 +146,7 @@ src/
 ├── Utils/
 │   ├── api/              # axiosInstance، ApiError
 │   ├── services/         # توابع درخواست auth، products، users
-│   └── *.ts              # توابع کمکی مستقل از UI: search، categories، uniqueId
+│   └── *.ts              # توابع کمکی مستقل از UI: matchesQuery، categoryLabels، uniqueId
 └── Validations/          # اسکیماهای Yup: ورود، محصول، کاربر
 ```
 
@@ -166,6 +166,8 @@ src/
   کاربر واردشده را از صفحه ورود دور نگه می‌دارد.
 - صفحه‌های مدیریت **code-split** هستند (در اولین بازدید بارگذاری می‌شوند) و همین باعث می‌شود باندل اصلی زیر هشدار
   ۵۰۰ کیلوبایتی Vite بماند.
+- `errorElement` در ریشه روتر، error boundary برنامه است: اگر صفحه‌ای هنگام رندر خطا بدهد یا فایل یک صفحه بارگذاری
+  نشود، به‌جای صفحه سفید `ErrorPage` نمایش داده می‌شود.
 - **محافظت از مسیرها فقط یک دروازه تجربه کاربری است، نه امنیت.** هر کسی می‌تواند state سمت کاربر را تغییر دهد و
   FakeStoreAPI برای هیچ endpoint ای توکن نمی‌خواهد. محافظت واقعی باید از سمت سرور انجام شود.
 
