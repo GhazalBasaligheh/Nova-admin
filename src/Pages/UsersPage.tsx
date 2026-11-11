@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 import { AlertIcon, SearchIcon } from '@/assets/Icons';
 import { UsersTable } from '@/Components/Users/UsersTable';
 import { CreateUserModal } from '@/Modals/CreateUserModal';
@@ -15,24 +14,7 @@ import { StatePanel } from '@/Shared/StatePanel';
 import { useDebouncedValue } from '@/Shared/useDebouncedValue';
 import { RequestStatus } from '@/types/Enums/RequestStatus';
 import { matchesQuery } from '@/Utils/matchesQuery';
-
-const Toolbar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: ${({ theme }) => theme.spacing.md};
-  margin-block-end: ${({ theme }) => theme.spacing.md};
-`;
-
-const Count = styled.p`
-  color: ${({ theme }) => theme.colors.textMuted};
-  font-size: 14px;
-`;
-
-const SkeletonList = styled.div`
-  display: grid;
-  gap: ${({ theme }) => theme.spacing.sm};
-`;
+import { Toolbar, Count, SkeletonList } from './UsersPage.styles';
 
 export function UsersPage() {
   const { t } = useTranslation();

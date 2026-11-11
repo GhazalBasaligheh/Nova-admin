@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@/Redux/hooks';
 import { createProduct, resetCreateStatus } from '@/Redux/slices/productsSlice';
 import { Button } from '@/Shared/Button';
@@ -12,36 +11,7 @@ import { useFormatters } from '@/Shared/useFormatters';
 import { RequestStatus } from '@/types/Enums/RequestStatus';
 import type { Product } from '@/types/product';
 import { productSchema, type ProductFormValues } from '@/Validations/productSchema';
-
-const Form = styled.form`
-  display: grid;
-  gap: ${({ theme }) => theme.spacing.md};
-`;
-
-const Row = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme.spacing.md};
-`;
-
-const Preview = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  font-size: 13px;
-  color: ${({ theme }) => theme.colors.textMuted};
-`;
-
-const FormError = styled.p`
-  color: ${({ theme }) => theme.colors.danger};
-  font-size: 14px;
-`;
-
-const Actions = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: ${({ theme }) => theme.spacing.sm};
-`;
+import { Form, Row, Preview, FormError, Actions } from './CreateProductModal.styles';
 
 const initialValues: ProductFormValues = {
   title: '',

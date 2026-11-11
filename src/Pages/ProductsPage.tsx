@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 import { AlertIcon, SearchIcon } from '@/assets/Icons';
 import { ProductsTable } from '@/Components/Products/ProductsTable';
 import { CreateProductModal } from '@/Modals/CreateProductModal';
@@ -16,24 +15,7 @@ import { useDebouncedValue } from '@/Shared/useDebouncedValue';
 import { useFormatters } from '@/Shared/useFormatters';
 import { RequestStatus } from '@/types/Enums/RequestStatus';
 import { matchesQuery } from '@/Utils/matchesQuery';
-
-const Toolbar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: ${({ theme }) => theme.spacing.md};
-  margin-block-end: ${({ theme }) => theme.spacing.md};
-`;
-
-const Count = styled.p`
-  color: ${({ theme }) => theme.colors.textMuted};
-  font-size: 14px;
-`;
-
-const SkeletonList = styled.div`
-  display: grid;
-  gap: ${({ theme }) => theme.spacing.sm};
-`;
+import { Toolbar, Count, SkeletonList } from './ProductsPage.styles';
 
 export function ProductsPage() {
   const { t } = useTranslation();

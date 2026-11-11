@@ -1,32 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 import { GlobeIcon, LogoutIcon, MoonIcon, SunIcon } from '@/assets/Icons';
 import { useAppDispatch, useAppSelector } from '@/Redux/hooks';
 import { logout } from '@/Redux/slices/authSlice';
 import { setLanguage, toggleTheme } from '@/Redux/slices/uiSlice';
-import { Button, IconButton } from '@/Shared/Button';
-import { TOPBAR_HEIGHT } from '@/Shared/theme/layout';
+import { IconButton } from '@/Shared/Button';
 import { Language } from '@/types/Enums/Language';
 import { Theme } from '@/types/Enums/Theme';
-
-const Bar = styled.header`
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: ${({ theme }) => theme.spacing.sm};
-  height: ${TOPBAR_HEIGHT}px;
-  padding-inline: ${({ theme }) => theme.spacing.xl};
-  border-block-end: 1px solid ${({ theme }) => theme.colors.border};
-  background: ${({ theme }) => theme.colors.surface};
-`;
-
-const LanguageButton = styled(Button)`
-  min-height: 40px;
-  padding-inline: ${({ theme }) => theme.spacing.md};
-`;
+import { Bar, LanguageButton } from './Topbar.styles';
 
 export function Topbar() {
   const { t } = useTranslation();
