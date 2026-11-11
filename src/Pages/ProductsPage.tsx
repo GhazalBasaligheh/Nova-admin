@@ -15,7 +15,7 @@ import { StatePanel } from '@/Shared/StatePanel';
 import { useDebouncedValue } from '@/Shared/useDebouncedValue';
 import { useFormatters } from '@/Shared/useFormatters';
 import { RequestStatus } from '@/types/Enums/RequestStatus';
-import { matchesQuery } from '@/Utils/search';
+import { matchesQuery } from '@/Utils/matchesQuery';
 
 const Toolbar = styled.div`
   display: flex;
