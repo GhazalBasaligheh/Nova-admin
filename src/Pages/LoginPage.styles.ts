@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IconButton } from '@/Shared/Button';
+import { IconButton } from '@/Shared/ui/Button';
 
 export const Page = styled.main`
   display: grid;

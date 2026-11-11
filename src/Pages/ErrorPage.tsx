@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { AlertIcon } from '@/assets/Icons';
-import { Button } from '@/Shared/Button';
-import { StatePanel } from '@/Shared/StatePanel';
+import { Button } from '@/Shared/ui/Button';
+import { StatePanel } from '@/Shared/ui/StatePanel';
 import { Page } from './ErrorPage.styles';
 
 // Shown by the router's errorElement when a page throws while rendering or fails to load.

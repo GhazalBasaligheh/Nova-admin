@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { Table, TableWrapper, Thumb } from '@/Shared/DataTable';
-import { useFormatters } from '@/Shared/useFormatters';
+import { Table, TableWrapper, Thumb } from '@/Shared/ui/DataTable';
+import { useFormatters } from '@/Shared/hooks/useFormatters';
 import type { Product } from '@/types/product';
 
 export function ProductsTable({ products }: { products: Product[] }) {
