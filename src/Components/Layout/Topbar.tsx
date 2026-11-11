@@ -3,7 +3,7 @@ import { GlobeIcon, LogoutIcon, MoonIcon, SunIcon } from '@/assets/Icons';
 import { useAppDispatch, useAppSelector } from '@/Redux/hooks';
 import { logout } from '@/Redux/slices/authSlice';
 import { setLanguage, toggleTheme } from '@/Redux/slices/uiSlice';
-import { IconButton } from '@/Shared/Button';
+import { IconButton } from '@/Shared/ui/Button';
 import { Language } from '@/types/Enums/Language';
 import { Theme } from '@/types/Enums/Theme';
 import { Bar, LanguageButton } from './Topbar.styles';

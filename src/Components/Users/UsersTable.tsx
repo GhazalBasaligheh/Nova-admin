@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Table, TableWrapper } from '@/Shared/DataTable';
+import { Table, TableWrapper } from '@/Shared/ui/DataTable';
 import type { User } from '@/types/user';
 
 export function UsersTable({ users }: { users: User[] }) {

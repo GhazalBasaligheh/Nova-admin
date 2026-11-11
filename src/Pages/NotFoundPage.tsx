@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import { StatePanel } from '@/Shared/StatePanel';
+import { StatePanel } from '@/Shared/ui/StatePanel';
 import { DEFAULT_AUTHENTICATED_PATH } from '@/Routes/paths';
 
 export function NotFoundPage() {

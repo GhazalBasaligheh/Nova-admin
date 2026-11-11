@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '@/Shared/Button';
+import { Button } from '@/Shared/ui/Button';
 import { TOPBAR_HEIGHT } from '@/Shared/theme/layout';
 
 export const Bar = styled.header`
