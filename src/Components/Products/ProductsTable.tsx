@@ -25,10 +25,13 @@ export function ProductsTable({ products }: { products: Product[] }) {
                 {/* The title cell names the row, so the image is decorative here. */}
                 <Thumb src={product.image} alt="" loading="lazy" />
               </td>
-              <td lang="en" dir="auto">
-                {product.title}
+              <td>
+                {/* <bdi> isolates the English title without flipping the cell's alignment. */}
+                <bdi lang="en">{product.title}</bdi>
               </td>
-              <td dir="ltr">{price(product.price)}</td>
+              <td>
+                <bdi dir="ltr">{price(product.price)}</bdi>
+              </td>
               <td>{category(product.category)}</td>
             </tr>
           ))}
