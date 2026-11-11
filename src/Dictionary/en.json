@@ -137,5 +137,10 @@
       "passwordRequired": "Please enter a password.",
       "phoneRequired": "Please enter a phone number."
     }
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "body": "An unexpected error happened. Reload the page to try again.",
+    "reload": "Reload page"
   }
 }
