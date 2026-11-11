@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Language } from '@/types/Enums/Language';
-import { getCategoryLabelKey } from '@/Utils/categories';
+import { getCategoryLabelKey } from '@/Utils/categoryLabels';
 
 const intlLocale = { [Language.Fa]: 'fa-IR', [Language.En]: 'en-US' } as const;
 
