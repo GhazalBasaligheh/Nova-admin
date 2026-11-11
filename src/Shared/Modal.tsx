@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { CloseIcon } from '@/assets/Icons';
 import { IconButton } from './Button';
 
-// Native <dialog> with showModal(): focus trapping, Esc to close, inert background and
-// focus return are handled by the browser.
+// Native <dialog> with showModal(): focus trapping, Esc to close
 const Dialog = styled.dialog`
   width: min(100% - 32px, 560px);
   max-height: calc(100vh - 64px);

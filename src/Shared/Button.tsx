@@ -27,7 +27,6 @@ const variants = {
   `,
 };
 
-// Transient ($) props don't reach the DOM.
 export const Button = styled.button<{ $variant?: Variant; $fullWidth?: boolean }>`
   display: inline-flex;
   align-items: center;
@@ -56,7 +55,6 @@ export const Button = styled.button<{ $variant?: Variant; $fullWidth?: boolean }
   }
 `;
 
-// Square, touch-friendly (44px) icon control. Always give it an aria-label.
 export const IconButton = styled.button`
   position: relative;
   display: inline-grid;

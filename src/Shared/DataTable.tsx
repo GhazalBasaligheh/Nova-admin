@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// Shared table styling for admin lists. Column content is provided by each page.
 export const TableWrapper = styled.div`
   overflow-x: auto;
   border: 1px solid ${({ theme }) => theme.colors.border};

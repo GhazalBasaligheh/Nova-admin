@@ -1,7 +1,8 @@
 import { object, string, type InferType } from 'yup';
 
-// Minimal rules (user decision): every field required, email must be a valid email.
-// No length, password-strength or phone-format rules. Messages are dictionary keys.
+// Minimal rules : every field required, email must be a valid email.
+// No length, password-strength or phone-format rule
+// Messages are dictionary keys.
 export const userSchema = object({
   firstName: string().trim().required('Users.errors.firstNameRequired'),
   lastName: string().trim().required('Users.errors.lastNameRequired'),

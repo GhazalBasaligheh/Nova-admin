@@ -1,5 +1,4 @@
-// Dictionary key (under "Categories") for each FakeStoreAPI category slug.
-// Slugs contain spaces and apostrophes; "jewelery" is the API's spelling.
+// jewelery" is the API's spelling.
 const categoryLabelKeys = {
   electronics: 'electronics',
   jewelery: 'jewelery',

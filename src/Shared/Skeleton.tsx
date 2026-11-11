@@ -5,7 +5,6 @@ const pulse = keyframes`
   50% { opacity: 0.5; }
 `;
 
-// Placeholder block; size it with the width/height props or the parent layout.
 export const Skeleton = styled.div<{ $height?: string; $width?: string }>`
   width: ${({ $width = '100%' }) => $width};
   height: ${({ $height = '16px' }) => $height};

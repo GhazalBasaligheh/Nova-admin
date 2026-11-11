@@ -33,7 +33,6 @@ interface StatePanelProps {
   tone?: 'neutral' | 'danger';
 }
 
-// Shared empty/error state. Errors are announced (role="alert"); empty results are polite (status).
 export function StatePanel({
   icon,
   title,
