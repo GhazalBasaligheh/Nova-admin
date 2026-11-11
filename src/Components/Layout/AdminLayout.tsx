@@ -4,7 +4,6 @@ import { SIDEBAR_WIDTH } from '@/Shared/theme/layout';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
 
-// Fixed sidebar + sticky top bar + scrolling content. Desktop-only (>= 1280px) per the brief.
 const Content = styled.div`
   min-height: 100vh;
   margin-inline-start: ${SIDEBAR_WIDTH}px;

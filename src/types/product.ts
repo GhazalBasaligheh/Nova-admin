@@ -1,4 +1,3 @@
-// FakeStoreAPI product shape (verified against the live API on 2026-11-09).
 export interface Product {
   id: number;
   title: string;

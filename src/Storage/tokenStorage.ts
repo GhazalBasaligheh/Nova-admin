@@ -1,7 +1,4 @@
-// The only place that touches the auth token's storage. Swapping the strategy
-// (memory, sessionStorage, cookie via a backend) means changing this file only.
-//
-// Current strategy: sessionStorage (user decision). Survives a refresh within the tab,
+// Current strategy: sessionStorage. Survives a refresh within the tab,
 // cleared when the tab closes. Readable by any script on the page, so it is exposed to XSS;
 // the README documents the HttpOnly-cookie production design this demo can't use without a backend.
 

@@ -14,8 +14,7 @@ export const axiosInstance = axios.create({
   headers: { Accept: 'application/json' },
 });
 
-// Standard bearer pattern (user decision). FakeStoreAPI doesn't validate the token, and the
-// custom header triggers a CORS preflight, which must be allowed by the API (verified: see README).
+// Standard bearer pattern . FakeStoreAPI doesn't validate the token
 axiosInstance.interceptors.request.use((config) => {
   const token = tokenStorage.get();
   if (token) config.headers.Authorization = `Bearer ${token}`;
@@ -45,9 +44,7 @@ function toApiError(error: unknown): ApiError {
       return new ApiError(ApiErrorKind.Unauthorized, `Unauthorized (${status})`, status);
     }
     if (status >= 500) return new ApiError(ApiErrorKind.Server, `Server error (${status})`, status);
-    if (!isJson(response)) {
-      return new ApiError(ApiErrorKind.Blocked, `Non-JSON response (${status})`, status);
-    }
+
     return new ApiError(ApiErrorKind.Client, `Request failed (${status})`, status);
   }
 
@@ -58,7 +55,7 @@ function toApiError(error: unknown): ApiError {
 axiosInstance.interceptors.response.use(
   (response) => {
     if (!isJson(response)) {
-      throw new ApiError(ApiErrorKind.Blocked, 'Non-JSON response', response.status);
+      throw new ApiError(ApiErrorKind.Parse, 'Non-JSON response', response.status);
     }
     return response;
   },

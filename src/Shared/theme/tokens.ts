@@ -1,4 +1,4 @@
-// Design tokens copied deliberately from NOVA Store (separate repos share no code). Keep in sync by hand.
+// Design tokens copied deliberately from NOVA Store (separate repos share no code).
 
 const navy = {
   900: '#0B1530',

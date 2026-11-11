@@ -1,6 +1,4 @@
 export enum ApiErrorKind {
-  // Non-JSON response (e.g. a bot-challenge page).
-  Blocked = 'blocked',
   // No response: timeout, DNS failure, connection reset, or a CORS rejection.
   Network = 'network',
   // 401/403: missing or rejected credentials.

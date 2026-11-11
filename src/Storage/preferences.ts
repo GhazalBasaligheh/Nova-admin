@@ -1,8 +1,7 @@
 import { DEFAULT_LANGUAGE, Language } from '@/types/Enums/Language';
 import { Theme } from '@/types/Enums/Theme';
 
-// Non-sensitive UI preferences in localStorage. Key names are also read by the
-// pre-render script in index.html (keep them in sync).
+// Non-sensitive UI preferences in localStorage. Key names are also read by the pre-render script in index.html .
 const THEME_KEY = 'nova-admin-theme';
 const LANGUAGE_KEY = 'nova-admin-language';
 
