@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@/Redux/hooks';
 import { createUser, resetCreateStatus } from '@/Redux/slices/usersSlice';
 import { Button } from '@/Shared/Button';
@@ -9,28 +8,7 @@ import { TextField } from '@/Shared/TextField';
 import { RequestStatus } from '@/types/Enums/RequestStatus';
 import type { User } from '@/types/user';
 import { userSchema, type UserFormValues } from '@/Validations/userSchema';
-
-const Form = styled.form`
-  display: grid;
-  gap: ${({ theme }) => theme.spacing.md};
-`;
-
-const Row = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme.spacing.md};
-`;
-
-const FormError = styled.p`
-  color: ${({ theme }) => theme.colors.danger};
-  font-size: 14px;
-`;
-
-const Actions = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: ${({ theme }) => theme.spacing.sm};
-`;
+import { Form, Row, FormError, Actions } from './CreateUserModal.styles';
 
 const initialValues: UserFormValues = {
   firstName: '',

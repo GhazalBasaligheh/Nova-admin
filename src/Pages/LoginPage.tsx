@@ -2,7 +2,6 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
-import styled from 'styled-components';
 import { BagIcon, EyeIcon, EyeOffIcon, GlobeIcon, MoonIcon, SunIcon } from '@/assets/Icons';
 import { useAppDispatch, useAppSelector } from '@/Redux/hooks';
 import { login } from '@/Redux/slices/authSlice';
@@ -17,73 +16,16 @@ import { RequestStatus } from '@/types/Enums/RequestStatus';
 import { Theme } from '@/types/Enums/Theme';
 import type { SerializedApiError } from '@/Utils/api/ApiError';
 import { loginSchema, type LoginValues } from '@/Validations/loginSchema';
-
-const Page = styled.main`
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-  padding: ${({ theme }) => theme.spacing.lg};
-`;
-
-const Corner = styled.div`
-  position: fixed;
-  top: ${({ theme }) => theme.spacing.md};
-  inset-inline-end: ${({ theme }) => theme.spacing.md};
-  display: flex;
-  gap: ${({ theme }) => theme.spacing.xs};
-`;
-
-const Card = styled.section`
-  display: grid;
-  gap: ${({ theme }) => theme.spacing.lg};
-  width: min(100%, 420px);
-  padding: ${({ theme }) => theme.spacing.xl};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.radius.lg};
-  background: ${({ theme }) => theme.colors.surface};
-  box-shadow: ${({ theme }) => theme.shadow.card};
-`;
-
-const Brand = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  font-size: 22px;
-  font-weight: 800;
-
-  svg {
-    color: ${({ theme }) => theme.colors.accent};
-  }
-`;
-
-const Heading = styled.div`
-  h1 {
-    font-size: 22px;
-  }
-
-  p {
-    color: ${({ theme }) => theme.colors.textMuted};
-  }
-`;
-
-const Form = styled.form`
-  display: grid;
-  gap: ${({ theme }) => theme.spacing.md};
-`;
-
-const FormError = styled.p`
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  border-radius: ${({ theme }) => theme.radius.sm};
-  background: ${({ theme }) => theme.colors.surfaceMuted};
-  color: ${({ theme }) => theme.colors.danger};
-  font-size: 14px;
-`;
-
-const PasswordToggle = styled(IconButton)`
-  width: 40px;
-  height: 40px;
-  color: ${({ theme }) => theme.colors.textMuted};
-`;
+import {
+  Page,
+  Corner,
+  Card,
+  Brand,
+  Heading,
+  Form,
+  FormError,
+  PasswordToggle,
+} from './LoginPage.styles';
 
 function loginErrorKey(error: SerializedApiError) {
   // FakeStoreAPI answers wrong credentials with 401 (docs also list 400 for bad input).
